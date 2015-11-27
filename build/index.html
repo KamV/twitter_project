@@ -1,15 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="twitter_user_list">
  <head lang="ru">
     <meta charset="UTF-8">
     <title>Форма twitter api</title>
     <script async src="app.js"></script>
  </head>
- <body>
+ <body ng-controller = "userOptions as options">
+ <label>Поиск <input ng-model="search" type="text"></label> <br>
+ <table>
+   <tr><th>  Имя  </th><th>  Число фолловеров  </th><th>  Число фолловингов  </th><th>  Статус  </th></tr>
+   <tr ng-repeat="user in users| filter:search">
+    <td>{{user.name}}</td>
+    <td>{{user.followers}}</td>
+    <td>{{user.following}}</td>
+    <td>{{user.status}}</td>
+  </tr>
+</table>
    <input id = "account_name" type = "text" size = "40">
-   <button id = "knock" onclick = "myFunction()"> Получить данные аккаунта </button>
-   <p><span> Фолловеры  </span> <span id="followers"></span></p>
-   <p><span> Фолловингов  </span> <span id="following"></span></p>
-   <p><span> Статус  </span> <span id="status"></span></p>
+   <button ng-click = "options.myclick()"> Получить данные аккаунта </button>
+   <p><span> Твит  </span> <span id="tweet"></span></p>
+   <p><span> Фолловингов  </span> <span id="following">{{options.users.following}}</span></p>
+   <p><span> Статус  </span> <span id="status">{{options.users.status}}</span></p>
  </body>
 </html>
