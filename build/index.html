@@ -5,19 +5,46 @@
     <title>Форма twitter api</title>
     <script async src="app.js"></script>
  </head>
- <body ng-controller = "userOptions as options">
- <label>Поиск <input ng-model="search" type="text"></label> <br>
- <table>
-   <tr><th>  Имя  </th><th>  Число фолловеров  </th><th>  Число фолловингов  </th><th>  Статус  </th></tr>
-   <tr ng-repeat="user in users| filter:search">
-    <td>{{user.name}}</td>
-    <td>{{user.followers}}</td>
-    <td>{{user.following}}</td>
-    <td>{{user.status}}</td>
-  </tr>
-</table>
-   <input id = "account_name" type = "text" size = "40">
-   <button ng-click = "options.myclick()"> Получить данные аккаунта </button>
-   <p><span> Твит  </span> <span id="tweet"></span></p>
+ <body>
+  <section ng-controller="userOptions as options">
+    <label>Поиск <input ng-model="search" type="text"></label> <br>
+    <table>
+      <tr><th>  Имя  </th><th>  Число фолловеров  </th><th>  Число фолловингов  </th><th>  Статус  </th></tr>
+      <tr ng-repeat="user in users| filter:search">
+        <td>{{user.name}}</td>
+        <td>{{user.followers}}</td>
+        <td>{{user.following}}</td>
+        <td>{{user.status}}</td>
+      </tr>
+    </table>
+    <input id = "account_name" type = "text" size = "40">
+    <button ng-click = "options.myclick()"> Получить данные аккаунта </button>
+    <p><span> Твит  </span> <span id="tweet"></span></p>
+  </section>
+  <section ng-controller="PanelController as panel">
+     <ul class="nav nav-pills">
+       <li ng-class="{ active:tab === 1 }">
+         <a href ng-click="tab = 1">Имя</a>
+       </li>
+       <li ng-class="{ active:tab === 2 }">
+         <a href ng-click="tab = 2">Количество фолловеров</a>
+       </li>
+       <li ng-class="{ active:tab === 2 }">
+         <a href ng-click="tab = 3">Статус</a>
+       </li>
+     </ul>
+     <div class="panel" ng-show="tab === 1">
+       <h4>Имя</h4>
+       <p>{{users[0].name}}</p>
+     </div>
+     <div class="panel" ng-show="tab === 2">
+       <h4>Количество фолловеров</h4>
+       <p>{{users[0].followers}}</p>
+     </div>
+     <div class="panel" ng-show="tab === 3">
+       <h4>Статус</h4>
+       <p>{{users[0].status}}</p>
+     </div>
+  </section>
  </body>
 </html>

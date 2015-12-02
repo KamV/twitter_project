@@ -36601,22 +36601,17 @@ $provide.value("$locale", {
      name: "Вася",
      followers: "5",
      following: "4",
-     status: "Прив"
+     status: "Привет брат"
    };
+
+   app.controller("PanelController",function($scope){
+     $scope.users = user;
+     $scope.tab = 1;
+     $scope.selectTab = function(setTab){
+       $scope.tab = setTab;
+     }
+     $scope.isSelected = function(checkTab){
+       return $scope.tab = checkTab;
+     }
+   });
  })();
-
- function myFunction(){
-   document.getElementById("followers").innerHTML = " ";
-   document.getElementById("following").innerHTML = " ";
-   document.getElementById("status").innerHTML = " ";
-   OAuth.initialize('rMEzxovyFqog3wQmXNu9DS69ICs');
-   //OAuth.create("twitter");
-   OAuth.popup('twitter').done(function(result){
-      result.get('https://api.twitter.com/1.1/statuses/home_timeline.json').done(function(data) {
-        document.getElementById("followers").innerHTML = data.text;
-        document.getElementById("following").innerHTML = data.friends_count;
-        document.getElementById("status").innerHTML = data.description;
-      })
-  });
-
-}
