@@ -45,4 +45,9 @@
        return $scope.tab = checkTab;
      }
    });
+   app.directive('tableDirective', function() {
+    return {
+      templateUrl: 'tableDirective.html'
+    };
+  });
  })();

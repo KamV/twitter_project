@@ -1,0 +1,7 @@
+<tr><th>  Имя  </th><th>  Число фолловеров  </th><th>  Число фолловингов  </th><th>  Статус  </th></tr>
+<tr ng-repeat="user in users| filter:search">
+  <td>{{user.name}}</td>
+  <td>{{user.followers}}</td>
+  <td>{{user.following}}</td>
+  <td>{{user.status}}</td>
+</tr>

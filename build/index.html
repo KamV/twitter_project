@@ -8,21 +8,14 @@
  <body>
   <section ng-controller="userOptions as options">
     <label>Поиск <input ng-model="search" type="text"></label> <br>
-    <table>
-      <tr><th>  Имя  </th><th>  Число фолловеров  </th><th>  Число фолловингов  </th><th>  Статус  </th></tr>
-      <tr ng-repeat="user in users| filter:search">
-        <td>{{user.name}}</td>
-        <td>{{user.followers}}</td>
-        <td>{{user.following}}</td>
-        <td>{{user.status}}</td>
-      </tr>
+    <table table-directive>
     </table>
     <input id = "account_name" type = "text" size = "40">
     <button ng-click = "options.myclick()"> Получить данные аккаунта </button>
     <p><span> Твит  </span> <span id="tweet"></span></p>
   </section>
   <section ng-controller="PanelController as panel">
-     <ul class="nav nav-pills">
+     <ul>
        <li ng-class="{ active:tab === 1 }">
          <a href ng-click="tab = 1">Имя</a>
        </li>
