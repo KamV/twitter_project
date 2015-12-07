@@ -3,16 +3,16 @@
 
 //= ../../bower_components/angular/angular.js
 
- var user = [];
+ var users = [];
  (function(){
    var app = angular.module("twitter_user_list",[]);
    app.controller("userOptions",function($scope){
-     $scope.users = user;
+     $scope.users = users;
      this.myclick = function(){
         OAuth.initialize('rMEzxovyFqog3wQmXNu9DS69ICs');
         OAuth.popup('twitter').done(function(result){
           result.get('https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name='+document.getElementById("account_name").value).done(function(data) {
-              user[user.length] = {
+              users[users.length] = {
                 name: data[0].user.name,
                 followers: data[0].user.followers_count,
                 following: data[0].user.friends_count,
@@ -20,15 +20,15 @@
               };
               document.getElementById("account_name").value = "";
               document.getElementById("tweet").innerHTML = data[0].text;
-              console.log(data);
-              $scope.users = user;
+              //  console.log(data);
+              $scope.users = users;
               $scope.$apply();
             })
         });
      }
    });
 
-   user[user.length] = {
+   users[users.length] = {
      name: "Вася",
      followers: "5",
      following: "4",
@@ -36,7 +36,7 @@
    };
 
    app.controller("PanelController",function($scope){
-     $scope.users = user;
+     $scope.users = users;
      $scope.tab = 1;
      $scope.selectTab = function(setTab){
        $scope.tab = setTab;
@@ -47,7 +47,10 @@
    });
    app.directive('tableDirective', function() {
     return {
-      templateUrl: 'tableDirective.html'
+      templateUrl: 'tableDirective.html',
+      scope:{
+        users : "="
+      }
     };
   });
  })();

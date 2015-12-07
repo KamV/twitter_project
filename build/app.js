@@ -36572,16 +36572,16 @@ $provide.value("$locale", {
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
 
- var user = [];
+ var users = [];
  (function(){
    var app = angular.module("twitter_user_list",[]);
    app.controller("userOptions",function($scope){
-     $scope.users = user;
+     $scope.users = users;
      this.myclick = function(){
         OAuth.initialize('rMEzxovyFqog3wQmXNu9DS69ICs');
         OAuth.popup('twitter').done(function(result){
           result.get('https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name='+document.getElementById("account_name").value).done(function(data) {
-              user[user.length] = {
+              users[users.length] = {
                 name: data[0].user.name,
                 followers: data[0].user.followers_count,
                 following: data[0].user.friends_count,
@@ -36589,15 +36589,15 @@ $provide.value("$locale", {
               };
               document.getElementById("account_name").value = "";
               document.getElementById("tweet").innerHTML = data[0].text;
-              console.log(data);
-              $scope.users = user;
+              //  console.log(data);
+              $scope.users = users;
               $scope.$apply();
             })
         });
      }
    });
 
-   user[user.length] = {
+   users[users.length] = {
      name: "Вася",
      followers: "5",
      following: "4",
@@ -36605,7 +36605,7 @@ $provide.value("$locale", {
    };
 
    app.controller("PanelController",function($scope){
-     $scope.users = user;
+     $scope.users = users;
      $scope.tab = 1;
      $scope.selectTab = function(setTab){
        $scope.tab = setTab;
@@ -36616,7 +36616,10 @@ $provide.value("$locale", {
    });
    app.directive('tableDirective', function() {
     return {
-      templateUrl: 'tableDirective.html'
+      templateUrl: 'tableDirective.html',
+      scope:{
+        users : "="
+      }
     };
   });
  })();
